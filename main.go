@@ -13,10 +13,12 @@ import (
 )
 
 func main() {
+	// Get the current working directory.
 	CWD, err := os.Getwd()
 	if err != nil {
 		log.Fatalf("Error while getting the current working directory : %s \n ", err)
 	}
+	// Read text from standard input
 	reader := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Printf("%s -- $$ ", CWD)
@@ -47,6 +49,8 @@ func list(c []string) {
 	// if a directory is provided
 	case 2:
 		files, err = ioutil.ReadDir(c[1])
+	default:
+		errorLog("Too many arguments")
 	}
 	if err != nil {
 		log.Fatalf("Error while listing directory content")
@@ -55,4 +59,9 @@ func list(c []string) {
 	for _, file := range files {
 		fmt.Println(file.Name())
 	}
+}
+
+// Prints an error message to the console
+func errorLog(s string) {
+	fmt.Printf("Error :  %s \n", s)
 }
