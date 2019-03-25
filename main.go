@@ -5,6 +5,7 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -50,10 +51,10 @@ func list(c []string) {
 	case 2:
 		files, err = ioutil.ReadDir(c[1])
 	default:
-		errorLog("Too many arguments")
+		err = errors.New(" ls : Too many arguments")
 	}
 	if err != nil {
-		log.Fatalf("Error while listing directory content")
+		errorLog(err)
 	}
 	// print the files array contents each at a time
 	for _, file := range files {
@@ -62,6 +63,6 @@ func list(c []string) {
 }
 
 // Prints an error message to the console
-func errorLog(s string) {
-	fmt.Printf("Error :  %s \n", s)
+func errorLog(err error) {
+	fmt.Printf("Error %s \n", err)
 }
