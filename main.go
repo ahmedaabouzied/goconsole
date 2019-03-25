@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Ahmed Abouzied <ahmedaabouzied44@gmail.com>.
+// This file should not be used for any purposes that contradict the LICENCE.
+
 package main
 
 import (
@@ -27,19 +30,25 @@ func main() {
 	}
 }
 
+// list the contents of current directory.
+// if a directory is provided it will
+// list that directory instead
 func list(c []string) {
 	var err error
 	var files []os.FileInfo
 	// check for number of args
 	switch len(c) {
+	// if no directory is provided
 	case 1:
 		files, err = ioutil.ReadDir("./")
+	// if a directory is provided
 	case 2:
 		files, err = ioutil.ReadDir(c[1])
 	}
 	if err != nil {
 		log.Fatalf("Error while listing directory content")
 	}
+	// print the files array contents each at a time
 	for _, file := range files {
 		fmt.Println(file.Name())
 	}
