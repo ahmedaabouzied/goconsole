@@ -29,6 +29,8 @@ func main() {
 		switch commandSlice[0] {
 		case "ls":
 			list(commandSlice)
+		case "cd":
+			changeDir(commandSlice, &CWD)
 		case "exit":
 			fmt.Println("Bye")
 			os.Exit(0)
@@ -59,6 +61,28 @@ func list(c []string) {
 	// print the files array contents each at a time
 	for _, file := range files {
 		fmt.Println(file.Name())
+	}
+}
+
+// Change the current working directory.
+func changeDir(c []string, wd *string) {
+	var err error
+	var path string
+	switch len(c) {
+	// exactly one argument to cd
+	case 2:
+		path = c[1]
+		// change the directory
+		err = os.Chdir(path)
+		if err == nil {
+			// display the new directory name
+			*wd, err = os.Getwd()
+		}
+	default:
+		err = errors.New("cd : Too many arguments")
+	}
+	if err != nil {
+		errorLog(err)
 	}
 }
 
