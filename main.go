@@ -26,6 +26,9 @@ func main() {
 		switch commandSlice[0] {
 		case "ls":
 			list(commandSlice)
+		case "exit":
+			fmt.Println("Bye")
+			os.Exit(0)
 		}
 	}
 }
