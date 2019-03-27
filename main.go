@@ -35,6 +35,8 @@ func main() {
 			createFile(commandSlice)
 		case "del":
 			deleteFile(commandSlice, &CWD)
+		case "mkdir":
+			makeDir(commandSlice, &CWD)
 		case "exit":
 			fmt.Println("Bye")
 			os.Exit(0)
@@ -93,6 +95,21 @@ func createFile(l []string) {
 	// Create New files
 	for i := 1; i < len(l); i++ {
 		os.Create(l[i])
+	}
+}
+
+// Create a new directory with the 777 permissions
+func makeDir(l []string, wd *string) {
+	for i := 1; i < len(l); i++ {
+		var mode os.FileMode
+		mode = 777
+		path := *wd + "/" + l[i]
+		err := os.Mkdir(path, mode)
+		if err != nil {
+			errorLog(err)
+		} else {
+			fmt.Printf("Create file %s", l[i])
+		}
 	}
 }
 
