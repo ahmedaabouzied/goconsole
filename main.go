@@ -31,6 +31,8 @@ func main() {
 			list(commandSlice)
 		case "cd":
 			changeDir(commandSlice, &CWD)
+		case "touch":
+			createFile(commandSlice)
 		case "exit":
 			fmt.Println("Bye")
 			os.Exit(0)
@@ -72,10 +74,8 @@ func changeDir(c []string, wd *string) {
 	// exactly one argument to cd
 	case 2:
 		path = c[1]
-		// change the directory
 		err = os.Chdir(path)
 		if err == nil {
-			// display the new directory name
 			*wd, err = os.Getwd()
 		}
 	default:
@@ -83,6 +83,14 @@ func changeDir(c []string, wd *string) {
 	}
 	if err != nil {
 		errorLog(err)
+	}
+}
+
+// Create New File
+func createFile(l []string) {
+	// Create New files
+	for i := 1; i < len(l); i++ {
+		os.Create(l[i])
 	}
 }
 
