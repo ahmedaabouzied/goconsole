@@ -33,6 +33,8 @@ func main() {
 			changeDir(commandSlice, &CWD)
 		case "touch":
 			createFile(commandSlice)
+		case "del":
+			deleteFile(commandSlice, &CWD)
 		case "exit":
 			fmt.Println("Bye")
 			os.Exit(0)
@@ -91,6 +93,20 @@ func createFile(l []string) {
 	// Create New files
 	for i := 1; i < len(l); i++ {
 		os.Create(l[i])
+	}
+}
+
+// Delete file in the current directory
+func deleteFile(l []string, wd *string) {
+	// Delete each file in the params
+	for i := 1; i < len(l); i++ {
+		filePath := *wd + "/" + l[i]
+		err := os.Remove(filePath)
+		if err != nil {
+			errorLog(err)
+		} else {
+			fmt.Printf("Deleted File %s \n", l[i])
+		}
 	}
 }
 
