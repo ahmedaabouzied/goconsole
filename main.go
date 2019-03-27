@@ -37,6 +37,8 @@ func main() {
 			deleteFile(commandSlice, &CWD)
 		case "mkdir":
 			makeDir(commandSlice, &CWD)
+		case "copy":
+			copyFile(commandSlice, &CWD)
 		case "exit":
 			fmt.Println("Bye")
 			os.Exit(0)
@@ -124,6 +126,26 @@ func deleteFile(l []string, wd *string) {
 		} else {
 			fmt.Printf("Deleted File %s \n", l[i])
 		}
+	}
+}
+
+// Copy a file into a new file
+func copyFile(l []string, wd *string) {
+	var err error
+	if len(l) == 3 {
+		src := *wd + "/" + l[1]
+		dist := *wd + "/" + l[2]
+		input, err := ioutil.ReadFile(src)
+		if err != nil {
+			errorLog(err)
+		}
+		err = ioutil.WriteFile(dist, input, 777)
+		if err != nil {
+			errorLog(err)
+		}
+	} else {
+		err = errors.New("copy : Too many arguments")
+		errorLog(err)
 	}
 }
 
