@@ -1,7 +1,7 @@
 // Copyright (c) 2019 Ahmed Abouzied <ahmedaabouzied44@gmail.com>.
 // This file should not be used for any purposes that contradict the LICENCE.
 
-package main
+package goconsole
 
 import (
 	"bufio"
