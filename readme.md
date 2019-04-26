@@ -18,28 +18,28 @@ To exit the application just run ``` exit ```.
 
 ## Supported commands 
 
-``` ls [directory name (optional)] ```
+* ``` ls [directory name (optional)] ```
 
 list the contents of current directory.
 if a directory is provided it willlist that directory instead.
 
-``` cd [directory name] ```
+* ``` cd [directory name] ```
 
 Changes the current working directory into the directory provided.
 
-``` touch [file name] ```
+* ``` touch [file name] ```
 
 Creates a new file with the provided file name.
 
-``` del [file name] ```
+* ``` del [file name] ```
 
 Deletes provided file from the current directory.
 
-``` mkdir [directory name] ```
+* ``` mkdir [directory name] ```
 
 Creates a new directory with the provided name.
 
-``` copy [fileName  , newFileName]  ```
+* ``` copy [fileName  , newFileName]  ```
     
 Copies the file provided into the new file .
 
